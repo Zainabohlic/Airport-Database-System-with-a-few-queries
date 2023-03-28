@@ -1,0 +1,747 @@
+CREATE TABLE PLANE_TYPE
+                        (
+                            WEIGH NUMERIC (5) NOT NULL,
+                            MODEL INT PRIMARY KEY,
+                            CAP NUMERIC (3)
+                        );
+
+INSERT INTO PLANE_TYPE VALUES
+(50000, 48275, 200);
+INSERT INTO PLANE_TYPE VALUES
+(57000, 93602, 300);
+INSERT INTO PLANE_TYPE VALUES
+(42000, 15048, 160);
+INSERT INTO PLANE_TYPE VALUES
+(63000, 76792, 470);
+INSERT INTO PLANE_TYPE VALUES
+(81000, 29463, 599);
+INSERT INTO PLANE_TYPE VALUES
+(75000, 50819, 520);
+INSERT INTO PLANE_TYPE VALUES
+(99000, 62948, 800);
+INSERT INTO PLANE_TYPE VALUES
+(85000, 78460, 650);
+INSERT INTO PLANE_TYPE VALUES
+(60000, 31509, 380);
+INSERT INTO PLANE_TYPE VALUES
+(53000, 49270, 265);
+INSERT INTO PLANE_TYPE VALUES
+(61000, 96108, 420);
+INSERT INTO PLANE_TYPE VALUES
+(99500, 74350, 850);
+INSERT INTO PLANE_TYPE VALUES
+(95000, 21867, 750);
+INSERT INTO PLANE_TYPE VALUES
+(90000, 52794, 700);
+INSERT INTO PLANE_TYPE VALUES
+(55000, 38946, 250);
+INSERT INTO PLANE_TYPE VALUES
+(59000, 60572, 333);
+INSERT INTO PLANE_TYPE VALUES
+(60500, 89135, 400);
+INSERT INTO PLANE_TYPE VALUES
+(78000, 17648, 550);
+INSERT INTO PLANE_TYPE VALUES
+(93000, 90237, 720);
+INSERT INTO PLANE_TYPE VALUES
+(71000, 41395, 500);
+
+CREATE TABLE HANGER 
+                    (
+                        HANGNO INT PRIMARY KEY,
+                        LOC VARCHAR (13),
+                        CAP INT,
+                        OCCU_SPACE INT
+                    );
+
+INSERT INTO HANGER VALUES
+(01, 'NEW YORK', 02, 01);
+INSERT INTO HANGER VALUES
+(02, 'CHICAGO', 02, 00);
+INSERT INTO HANGER VALUES
+(03, 'NEW HAMPSHIRE', 01, 00);
+INSERT INTO HANGER VALUES
+(04, 'SAN FRANCISCO', 05, 03);
+INSERT INTO HANGER VALUES
+(05, 'AUSTIN', 04, 02);
+INSERT INTO HANGER VALUES
+(06, 'NEW YORK', 03, 01);
+INSERT INTO HANGER VALUES
+(07, 'NEW JERSEY', 03, 02);
+INSERT INTO HANGER VALUES
+(08, 'WASHINGTON DC', 05, 01);
+INSERT INTO HANGER VALUES
+(09, 'LOS ANGELES', 02, 02);
+INSERT INTO HANGER VALUES
+(10, 'BOSTON', 03, 02);
+INSERT INTO HANGER VALUES
+(11, 'SAN DIEGO', 04, 04);
+INSERT INTO HANGER VALUES
+(12, 'ATLANTA', 02, 01);
+INSERT INTO HANGER VALUES
+(13, 'MIAMI', 02, 00);
+INSERT INTO HANGER VALUES
+(14, 'DENVER', 01, 01);
+INSERT INTO HANGER VALUES
+(15, 'PHILADELPHIA', 05, 01);
+INSERT INTO HANGER VALUES
+(16, 'PORTLAND', 03, 02);
+INSERT INTO HANGER VALUES
+(17, 'FREZNO', 04, 03);
+INSERT INTO HANGER VALUES
+(18, 'COLUMBUS', 01, 01);
+INSERT INTO HANGER VALUES
+(19, 'SEATLE', 05, 04);
+INSERT INTO HANGER VALUES
+(20, 'PHOENIX', 04, 02);
+
+
+CREATE TABLE AIRPLANE
+                    (REGNO INT PRIMARY KEY,
+                    MOD_NO INT,
+                    HANG_NO INT,
+                    FOREIGN KEY (MOD_NO) REFERENCES PLANE_TYPE (MODEL),
+                    FOREIGN KEY (HANG_NO) REFERENCES HANGER (HANGNO));
+
+INSERT INTO AIRPLANE (REGNO, MOD_NO, HANG_NO) VALUES 
+(1111, 93602, 01);
+INSERT INTO AIRPLANE VALUES (5123, 48275, 01);
+INSERT INTO AIRPLANE VALUES (1000, 15048, 02);
+INSERT INTO AIRPLANE VALUES (2000, 76792, 02);
+INSERT INTO AIRPLANE VALUES (3000, 29463, 03);
+INSERT INTO AIRPLANE VALUES (4000, 50819, 04);
+INSERT INTO AIRPLANE VALUES (5000, 62948, 04);
+INSERT INTO AIRPLANE VALUES (6000, 78460, 04);
+INSERT INTO AIRPLANE VALUES (7000, 31509, 04);
+INSERT INTO AIRPLANE VALUES (8000, 49270, 05);
+INSERT INTO AIRPLANE VALUES (9000, 96108, 05);
+INSERT INTO AIRPLANE VALUES (1500, 74350, 10);
+INSERT INTO AIRPLANE VALUES (2500, 21867, 10);
+INSERT INTO AIRPLANE VALUES (3500, 52794, 10);
+INSERT INTO AIRPLANE VALUES (4500, 38946, 14);
+INSERT INTO AIRPLANE VALUES (5500, 60572, 16);
+INSERT INTO AIRPLANE VALUES (6500, 89135, 16);
+INSERT INTO AIRPLANE VALUES (7500, 17648, 18);
+INSERT INTO AIRPLANE VALUES (8500, 90237, 19);
+INSERT INTO AIRPLANE VALUES (9500, 41395, 20);
+
+
+CREATE TABLE OWNERS 
+                    (
+                        SSN INT PRIMARY KEY,
+                        ONAME VARCHAR(20),
+                        OTYPE VARCHAR(20),
+                    );
+
+INSERT INTO OWNERS (SSN, ONAME, OTYPE) VALUES
+
+  (11, 'Al-Pachino', 'Person'),
+  (07, 'Tim Allen', 'Person'),
+  (13, 'Tom Hanks', 'Person'),
+  (19, 'Chris Evans', 'Person'),
+  (08, 'Emma Stone', 'Person'),
+  (14, 'Olivia Wilde', 'Person'),
+  (27, 'Leo-DiCaprio', 'Person'),
+  (16, 'Apple Inc.', 'Corporation'),
+  (06, 'Globe Corp.', 'Corporation'),
+  (10, 'Google Inc.', 'Corporation'),
+  (01, 'Amazon', 'Corporation'),
+  (09, 'CoCo Corp.', 'Corporation');
+
+
+
+CREATE TABLE CORPORATION 
+                    
+                    (
+                        SSN INT PRIMARY KEY,
+                        COONAME VARCHAR (20) NOT NULL,
+                        COOADD VARCHAR (20),
+                        COOPHONE NUMERIC (12),
+                        FOREIGN KEY (SSN) REFERENCES OWNERS (SSN)
+                    );
+
+INSERT INTO CORPORATION (SSN, COONAME, COOADD, COOPHONE) VALUES
+
+  (06, 'Globe Corp.', '789 Elm St.', 5559012),
+  (10, 'Google Inc.', '1313 Walnut St.', 5557890),
+  (16, 'Apple Inc.', '123 Main St.', 5559012),
+  (01, 'Amazon', '2121 Spruce St.', 5553456),
+  (09, 'CoCo Corp.', '2323 Ash Ave.', 5557890);
+
+CREATE TABLE PERSON 
+                    (
+                        PSSN INT PRIMARY KEY,
+                        PNAME VARCHAR (20),
+                        PADD VARCHAR (20),
+                        PERPHONE NUMERIC (12),
+                        LOCAT VARCHAR (20),
+                        --CONSTRAINT FK_PER_OWNER 
+                        FOREIGN KEY (PSSN) REFERENCES OWNERS (SSN)
+                    );
+
+INSERT INTO PERSON (PSSN, PNAME, PADD, PERPHONE, LOCAT) VALUES
+
+  (07, 'Tim Allen', '1111 Cedar Ave', 9203383, 'New York'),
+  (08, 'Emma Stone', '1212 Pine St', 9282716, 'Washington DC'),
+  (13, 'Tom Hanks', '1414 Willow Rd', 9234840, 'Boston'),
+  (14, 'Olivia Wilde', '1515 Ash Lane', 9214930, 'New Orleans'),
+  (19, 'Chris Evans', '1717 Rose Lane', 9240131, 'Raleigh'),
+  (27, 'Leo-DiCaprio', '1266 SanFran Ave', 9922002, 'Philadelphia'),
+  (11, 'Al-Pachino', '356 Birch Boulevard', 1223524, 'Dallas');
+
+
+CREATE TABLE PILOT 
+                    (
+                        PILID INT PRIMARY KEY,
+                        PNAME VARCHAR (20),
+                        LICNO VARCHAR (5),
+                        REST VARCHAR (20)
+                    );
+
+INSERT INTO PILOT (PILID, PNAME, LICNO, REST) VALUES
+
+    (8850, 'Emily Johnson', '90882', 'Qatar Airways'),
+    (9950, 'Ethan Wilson', '34521', 'American Airlines'),
+    (9999, 'Olivia Brown', '12345', 'Delta Airlines'),
+    (8888, 'Noah Davis', '67890', 'Qatar Airlines'),
+    (7777, 'Ava Taylor', '24680', 'American Airlines'),
+    (7750, 'Sophia Rodriguez', '43556', 'Qatar Airways'),
+    (6666, 'James Garcia', '13579', 'Delta Airlines'),
+    (6650, 'Charlotte Clark', '87654', 'Qatar Airways'),
+    (5555, 'Benjamin Lee', '54321', 'Qatar Airways'),
+    (4444, 'Mia Baker', '97531', 'Delta Airlines'),
+    (3333, 'Samuel Jackson', '86420', 'American Airlines'),
+    (2222, 'Michael Hernandez', '11332', 'American Airlines');
+
+
+CREATE TABLE EMPLOYEE
+                    (
+                        EID INT PRIMARY KEY,
+                        ENAME VARCHAR (20),
+                        SALARAY DECIMAL (10, 2),
+                        SHIFT VARCHAR (8),
+                        shift_time varchar (10)
+                    );
+
+INSERT INTO EMPLOYEE (EID, ENAME, SALARAY, SHIFT, shift_time) VALUES
+
+(1001, 'John Smith', 42000.00, 'Morning', '7AM-3PM'),
+(1002, 'Jessica Lee', 55000.00, 'Evening', '2PM-10PM'),
+(1003, 'David Kim', 48000.00, 'Night', '10PM-6AM'),
+(1004, 'Sarah Johnson', 37000.00, 'Morning', '7AM-3PM'),
+(1005, 'Andrew Brown', 61000.00, 'Evening', '3PM-11PM'),
+(1006, 'Emma Davis', 52000.00, 'Night', '11PM-7AM'),
+(1007, 'Michael Wilson', 45000.00, 'Morning', '8AM-4PM'),
+(1008, 'Olivia Martin', 56000.00, 'Evening', '4PM-12AM'),
+(1009, 'Ryan Garcia', 49000.00, 'Night', '12AM-8AM'),
+(1010, 'Avery Thompson', 40000.00, 'Morning', '9AM-5PM'),
+(1011, 'Brandon Hernandez', 53000.00, 'Evening', '5PM-1AM'),
+(1012, 'Mia Turner', 46000.00, 'Night', '1AM-9AM'),
+(1013, 'Ethan Rodriguez', 39000.00, 'Morning', '7AM-3PM'),
+(1014, 'Isabella White', 57000.00, 'Evening', '2PM-10PM'),
+(1015, 'Tyler Martin', 50000.00, 'Night', '10PM-6AM'),
+(1016, 'Madison Clark', 38000.00, 'Morning', '7AM-3PM'),
+(1017, 'Christopher Walker', 62000.00, 'Evening', '3PM-11PM'),
+(1018, 'Ava Green', 53000.00, 'Night', '11PM-7AM'),
+(1019, 'Nathan Perez', 44000.00, 'Morning', '7AM-3PM'),
+(1020, 'Sophia Hall', 57000.00, 'Evening', '4PM-12AM');
+
+CREATE TABLE SERVICE_RECORD 
+                            (
+                                SERVICE_ID INT PRIMARY KEY,
+                                date DATE,
+                                hours NUMERIC(2),
+                                work_code VARCHAR(10)
+                            );
+
+INSERT INTO SERVICE_RECORD (SERVICE_ID, date, hours, work_code) VALUES
+
+(1234, '2022-01-05', 6, 'WC001'),
+(5678, '2022-02-10', 8, 'WC002'),
+(9101, '2022-03-15', 7, 'WC003'),
+(1314, '2022-04-20', 6, 'WC004'),
+(1516, '2022-05-25', 7, 'WC005'),
+(1718, '2022-06-30', 8, 'WC006'),
+(1920, '2022-07-05', 9, 'WC007'),
+(2122, '2022-08-10', 6, 'WC008'),
+(2324, '2022-09-15', 6, 'WC009'),
+(2526, '2022-10-20', 7, 'WC010'),
+(2728, '2022-11-25', 8, 'WC011'),
+(2930, '2022-12-30', 8, 'WC012'),
+(3132, '2023-01-05', 9, 'WC013'),
+(3334, '2023-02-10', 9, 'WC014'),
+(3536, '2023-03-15', 9, 'WC015'),
+(3738, '2023-04-20', 7, 'WC016'),
+(3940, '2023-05-25', 9, 'WC017'),
+(4142, '2023-06-30', 8, 'WC018'),
+(4344, '2023-07-05', 7, 'WC019'),
+(4546, '2023-08-10', 8, 'WC020');
+
+CREATE TABLE OWNS (
+  PURCHASE_DATE DATE,
+  AIRREG INT, 
+  OSSN INT, 
+  FOREIGN KEY (AIRREG) REFERENCES AIRPLANE (REGNO),
+  FOREIGN KEY (OSSN) REFERENCES OWNERS (SSN)
+);
+
+INSERT INTO OWNS (PURCHASE_DATE, AIRREG, OSSN)
+VALUES
+  ('2023-03-01', 1111, 07),--p
+  ('2023-02-01', 5123, 13),--p
+  ('2023-03-01', 1000, 19),--p
+  ('2023-02-02', 1500, 08),--p
+  ('2023-01-02', 2000, 14),--p
+  ('2023-01-02', 2500, 27),--p
+  ('2023-01-03', 3000, 16),--c
+  ('2023-02-03', 3500, 06),--c
+  ('2023-01-03', 4000, 10),--c
+  ('2023-02-04', 4500, 01),--c
+  ('2023-01-04', 5000, 09),--c
+  ('2023-01-04', 5500, 16),--c
+  ('2023-02-05', 6000, 16),--c
+  ('2023-03-05', 6500, 11),--p
+  ('2023-01-05', 7000, 01),--c
+  ('2023-01-06', 7500, 16),--c
+  ('2023-02-06', 8000, 10),--c
+  ('2023-01-06', 8500, 09),--c
+  ('2023-03-07', 9000, 01),--c
+  ('2023-01-07', 9500, 16);--c
+
+
+CREATE TABLE FLIES (
+  AIRMOD INT,
+  P_ID INT,
+  FOREIGN KEY (AIRMOD) REFERENCES PLANE_TYPE (MODEL),
+  FOREIGN KEY (P_ID) REFERENCES PILOT (PILID)
+);
+
+INSERT INTO FLIES (P_ID, AIRMOD) VALUES
+
+(8850, 93602), (8850, 48275), (8850, 15048), (8850, 76792), (8850, 50819),
+
+(5555, 93602), (5555, 48275), (5555, 15048), (5555, 76792), (5555, 50819),
+
+(7750, 93602), (7750, 48275), (7750, 15048), (7750, 76792), (7750, 50819),
+
+(6650, 93602), (6650, 48275), (6650, 15048), (6650, 76792), (6650, 50819),
+
+(8888, 93602), (8888, 48275), (8888, 15048), (8888, 76792), (8888, 50819),
+
+(9950, 48275), (9950, 78460), (9950, 15048), (9950, 76792),
+
+(7777, 48275), (7777, 78460), (7777, 15048), (7777, 76792),
+
+(3333, 48275), (3333, 78460), (3333, 15048), (3333, 76792),
+
+(2222, 48275), (2222, 78460), (2222, 15048), (2222, 76792),
+
+(9999, 17648), (9999, 38946), (9999, 60572),
+
+(6666, 17648), (6666, 38946), (6666, 60572),
+
+(4444, 17648), (4444, 38946), (4444, 60572);
+
+
+ 
+
+CREATE TABLE WORKS_ON (
+  SERVICE_MOD INT,
+  EMP_NO INT, 
+  FOREIGN KEY (SERVICE_MOD) REFERENCES PLANE_TYPE (MODEL),
+  FOREIGN KEY (EMP_NO) REFERENCES EMPLOYEE (EID)
+);
+INSERT INTO WORKS_ON (SERVICE_MOD, EMP_NO)VALUES
+
+(93602, 1001),
+(48275, 1002),
+(15048, 1003),
+(76792, 1004),
+(29463, 1005),
+(50819, 1020),
+(62948, 1019),
+(78460, 1018),
+(31509, 1017),
+(49270, 1016),
+(96108, 1015),--11
+(21867, 1001),--13
+(74350, 1020),--12
+(52794, 1019),
+(38946, 1020),
+(60572, 1002),
+(89135, 1003),
+(17648, 1001),
+(90237, 1009),
+(41395, 1010);
+
+
+CREATE TABLE PLANE_SERVICE (
+    SERVE_ID INT ,
+    A_SERVICE INT, 
+    SER_DATE DATE,
+	  HOURS_WORKED INT,
+	  STATUS_ VARCHAR(10),
+    EMP_ID INT,
+    FOREIGN KEY (SERVE_ID) REFERENCES SERVICE_RECORD (SERVICE_ID),
+    FOREIGN KEY (A_SERVICE) REFERENCES AIRPLANE (REGNO),
+    FOREIGN KEY (EMP_ID) REFERENCES EMPLOYEE (EID)
+);
+
+INSERT INTO PLANE_SERVICE(A_SERVICE, SERVE_ID, SER_DATE, HOURS_WORKED, STATUS_, EMP_ID)VALUES
+
+(1111, 1234, '2023-01-12', 4, 'ONGOING', 1009),
+(1000, 5678, '2023-03-20', 6, 'COMPLETE', 1002),
+(2000, 9101, '2023-02-12', 5, 'COMPLETE', 1003),
+(3000, 1314, '2023-01-02', 2, 'COMPLETE', 1004),
+(4000, 1516, '2023-03-21', 8, 'ONGOING', 1005),
+(5000, 1718, '2023-03-19', 7, 'ONGOING', 1012),
+(2500, 4546, '2023-02-11', 1, 'ONGOING', 1020),
+(3500, 4344, '2023-02-02', 9, 'ONGOING', 1019),
+(1111, 4142, '2023-03-26', 2, 'ONGOING', 1018),
+(9500, 3940, '2023-03-03', 6, 'COMPLETE', 1017),
+(6500, 3738, '2023-01-07', 5, 'ONGOING', 1016),
+(7000, 3536, '2023-02-22', 5, 'COMPLETE', 1015),
+(5123, 3334, '2023-02-15', 8, 'COMPLETE', 1014),
+(2000, 3132, '2023-03-22', 3, 'COMPLETE', 1013),
+(1000, 1920, '2023-03-24', 4, 'COMPLETE', 1007),
+(1111, 2122, '2023-02-13', 9, 'ONGOING', 1008),
+(4000, 2324, '2023-03-17', 2, 'ONGOING', 1002),
+(5000, 2526, '2023-01-19', 6, 'ONGOING', 1010),
+(3000, 2728, '2023-01-01', 7, 'COMPLETE', 1011),
+(6500, 2930, '2023-03-16', 9, 'ONGOING', 1012);
+
+CREATE TABLE MAINTAINS (
+  E_SER INT, 
+  SER_ID INT,
+  FOREIGN KEY (E_SER) REFERENCES EMPLOYEE (EID),
+  FOREIGN KEY (SER_ID) REFERENCES SERVICE_RECORD (SERVICE_ID)
+);
+INSERT INTO MAINTAINS(E_SER,SER_ID)VALUES
+(1001, 1234),
+(1002, 5678),
+(1003, 9101),
+(1004, 1314),
+(1005, 1516),
+(1006, 1718),
+(1007, 1920),
+(1008, 2122),
+(1009, 2324),
+(1010, 2526),
+(1011, 2728),
+(1012, 2930),
+(1013, 3132),
+(1014, 3334),
+(1015, 3536),
+(1016, 3738),
+(1017, 3940),
+(1018, 4142),
+(1019, 4344),
+(1020, 4546);
+
+
+CREATE TABLE PURCHASE (
+  PURCH_DATE DATE,
+  BUYER_ID INT, 
+  SELLER_ID INT,
+  MOD INT,
+  FOREIGN KEY (BUYER_ID) REFERENCES PERSON (PSSN),
+  FOREIGN KEY (SELLER_ID) REFERENCES CORPORATION (SSN),
+  FOREIGN KEY (MOD) REFERENCES PLANE_TYPE (MODEL)
+);
+
+INSERT INTO PURCHASE(PURCH_DATE, BUYER_ID, SELLER_ID, MOD)VALUES
+
+('2023-02-11', 07, 09, 48275),
+('2023-02-01', 08, 01, 93602),
+('2023-01-12', 13, 06, 15048),
+('2023-02-05', 14, 16, 76792),
+('2022-05-13', 19, 01, 29463),
+('2022-01-27', 27, 09, 50819),
+('2023-02-21', 11, 10, 62948);
+
+--('2023-02-15', 09, 08, 48275),
+--('2023-01-08', 01, 07, 41395),
+--('2023-03-12', 10, 14, 41395);
+--('2023-02-08', 06, 19, 76792);
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+SELECT*
+FROM AIRPLANE;
+
+SELECT*
+FROM PLANE_TYPE;
+
+SELECT*
+FROM HANGER;
+
+SELECT* 
+FROM OWNERS;
+
+SELECT*
+FROM CORPORATION;
+
+SELECT*
+FROM PERSON;
+
+SELECT*
+FROM PILOT;
+
+SELECT*
+FROM EMPLOYEE;
+
+SELECT*
+FROM SERVICE_RECORD;
+
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+
+USE master;
+
+DECLARE @table_name VARCHAR(MAX);
+DECLARE table_cursor CURSOR FOR
+SELECT table_name FROM information_schema.tables WHERE table_type = 'BASE TABLE';
+
+OPEN table_cursor;
+FETCH NEXT FROM table_cursor INTO @table_name;
+
+WHILE @@FETCH_STATUS = 0
+BEGIN
+    DECLARE @constraint_name VARCHAR(MAX);
+    DECLARE constraint_cursor CURSOR FOR
+    SELECT constraint_name FROM information_schema.table_constraints 
+    WHERE table_name = @table_name AND constraint_type = 'FOREIGN KEY';
+
+    OPEN constraint_cursor;
+    FETCH NEXT FROM constraint_cursor INTO @constraint_name;
+
+    WHILE @@FETCH_STATUS = 0
+    BEGIN
+        DECLARE @sql NVARCHAR(MAX);
+        SET @sql = 'ALTER TABLE ' + @table_name + ' DROP CONSTRAINT ' + @constraint_name;
+        EXEC sp_executesql @sql;
+        FETCH NEXT FROM constraint_cursor INTO @constraint_name;
+    END
+
+    CLOSE constraint_cursor;
+    DEALLOCATE constraint_cursor;
+
+    SET @sql = 'DROP TABLE ' + @table_name;
+    EXEC sp_executesql @sql;
+
+    FETCH NEXT FROM table_cursor INTO @table_name;
+END
+
+CLOSE table_cursor;
+DEALLOCATE table_cursor;
+
+
+
+-----------------------------------------------------------------------------------
+------------------------------------QUERIES----------------------------------------
+-----------------------------------------------------------------------------------
+
+
+
+--3. 
+SELECT REGNO AS 'Registration_No'
+FROM AIRPLANE AS A
+LEFT JOIN PLANE_SERVICE AS P ON A.REGNO = P.A_SERVICE
+WHERE P.A_SERVICE IS NULL;
+
+--4.
+SELECT COONAME AS CORP_NAME, COOADD AS CORP_ADDRESS, O.AIRREG, P.CAP
+FROM CORPORATION AS C, OWNS AS O, PLANE_TYPE AS P, AIRPLANE AS A
+WHERE C.SSN = O.OSSN AND O.AIRREG = A.REGNO AND A.MOD_NO = P.MODEL AND P.CAP > 200;
+
+
+--5.
+SELECT AVG(SALARAY) AS 'Average Salaray'
+FROM EMPLOYEE
+WHERE shift_time = '10PM-6AM';
+
+--6.
+SELECT TOP(5) ENAME AS 'Employee_Name', HOURS AS 'Max_Hours'
+FROM EMPLOYEE AS E, SERVICE_RECORD AS S, MAINTAINS AS M 
+WHERE M.E_SER = E.EID AND M.SER_ID = S.SERVICE_ID AND [hours] = 9;
+
+--7.
+SELECT DISTINCT A.MOD_NO, A.REGNO, P.SER_DATE
+FROM AIRPLANE AS A, PLANE_SERVICE AS P
+WHERE (P.SER_DATE > DATEADD(day, -7, GETDATE())) AND P.A_SERVICE = A.REGNO;
+
+--8.
+SELECT O.ONAME AS 'OWNER', PER.PERPHONE AS 'PHONE_NO', P.PURCH_DATE AS 'PURCHASE_DATE'
+FROM OWNERS AS O, PURCHASE AS P, PERSON AS PER
+WHERE (DATEPART(MM, GETDATE()) - DATEPART(MM, P.PURCH_DATE) = 1) AND P.BUYER_ID = PER.PSSN AND PER.PSSN = O.SSN;
+
+--9.
+SELECT  PILOT.PILID AS PILOT_ID, COUNT(*) AS NO_OF_AIRPLANES
+FROM FLIES, PILOT
+WHERE PILOT.PILID = FLIES.P_ID
+GROUP BY PILOT.PILID
+ORDER BY COUNT(*);
+
+--10.
+SELECT TOP 1 LOC AS LOCATION, CAP AS CAPACITY, MAX(CAP - OCCU_SPACE) AS AVAILABLE_SPACE
+FROM HANGER
+GROUP BY LOC, CAP
+ORDER BY MAX(CAP) DESC;
+
+--11. 
+SELECT C.SSN AS CORPORATION_ID, C.COONAME AS CORPORATION_NAME, COUNT(*) AS PLANES_OWNED
+FROM CORPORATION AS C,  OWNS AS O
+WHERE C.SSN = O.OSSN
+GROUP BY C.SSN, C.COONAME
+ORDER BY COUNT(*) DESC;
+
+--12.
+SELECT A.REGNO AS AIRPLANE_REGISTERATION, A.MOD_NO AS AIRPLANE_MODEL, AVG(P.HOURS_WORKED) AS AVG_HOURS_SERVICE
+FROM PLANE_SERVICE P 
+INNER JOIN AIRPLANE A ON A.REGNO = P.A_SERVICE
+GROUP BY A.MOD_NO, A.REGNO;
+
+
+--13. 
+SELECT DISTINCT PNAME AS NAME
+FROM  EMPLOYEE AS E, PERSON AS P
+INNER JOIN PURCHASE AS PC ON PC.BUYER_ID = P.PSSN
+INNER JOIN AIRPLANE AS A ON A.MOD_NO = PC.MOD
+INNER JOIN PLANE_SERVICE AS PS ON PS.A_SERVICE = A.REGNO
+WHERE PS.STATUS_ = 'Ongoing' AND E.EID NOT IN (SELECT E.EID
+FROM PLANE_SERVICE
+);
+
+--14.
+SELECT DISTINCT PNAME AS NAME, PERPHONE AS 'PHONE_NO', P.LOCAT
+FROM PERSON AS P
+INNER JOIN PURCHASE AS PC ON P.PSSN = PC.BUYER_ID
+INNER JOIN HANGER AS H ON H.LOC = P.LOCAT;
+
+
+--15.
+SELECT DISTINCT
+P.PILID AS PILOT_ID, P.PNAME AS PILOT_NAME, PS.STATUS_ AS MAINTENANCE_STATUS
+FROM PILOT P 
+JOIN FLIES F ON P.PILID = F.P_ID
+JOIN AIRPLANE A ON F.AIRMOD  = A.MOD_NO
+JOIN PLANE_SERVICE PS ON PS.A_SERVICE = A.REGNO
+WHERE PS.STATUS_ = 'ONGOING';
+
+--16.
+SELECT E.ENAME, E.EID, O.OSSN AS OWNER_ID, C.COONAME AS CORPORATION_NAME, SUM(PS.HOURS_WORKED) AS total_hours_worked
+FROM EMPLOYEE AS E
+JOIN WORKS_ON AS W ON E.EID = W.EMP_NO
+JOIN AIRPLANE AS A ON A.MOD_NO = W.SERVICE_MOD
+JOIN OWNS AS O ON W.SERVICE_MOD = A.MOD_NO
+JOIN CORPORATION C ON O.OSSN = C.SSN
+JOIN PLANE_SERVICE ps ON A.REGNO = PS.A_SERVICE
+WHERE C.COONAME = 'APPLE INC.'
+GROUP BY E.ENAME, E.EID, O.OSSN, C.COONAME
+ORDER BY total_hours_worked DESC;
+
+--17.
+SELECT A.MOD_NO, REGNO
+FROM AIRPLANE A
+WHERE
+A.REGNO NOT IN (SELECT O.AIRREG
+			FROM OWNS O
+			JOIN CORPORATION C ON C.SSN = O.OSSN)
+			AND
+A.REGNO NOT IN (
+			SELECT W.EMP_NO
+			FROM WORKS_ON W
+			JOIN EMPLOYEE E ON W.EMP_NO= E.EID
+			WHERE E.SHIFT = 'MORNING');
+
+
+--18. 
+SELECT PNAME AS NAME, PADD AS ADDRESS, PSSN
+FROM PERSON AS P
+JOIN OWNERS AS O ON O.SSN = P.PSSN
+JOIN PURCHASE AS PC ON P.PSSN = PC.BUYER_ID
+JOIN CORPORATION AS C ON C.SSN = PC.SELLER_ID
+JOIN PLANE_TYPE AS PT ON PT.MODEL = PC.MOD
+JOIN AIRPLANE AS A ON A.MOD_NO = PT.MODEL
+JOIN OWNS AS OH ON (OH.OSSN = C.SSN) AND (DATEPART(MM, GETDATE()) - DATEPART(MM, PC.PURCH_DATE) = 1)
+WHERE (DATEPART(MM, GETDATE()) - DATEPART(MM, OH.PURCHASE_DATE) = 1);
+
+--19.
+SELECT HANGNO AS HANGER_NO, CAP AS TOTAL_CAPACITY, LOC AS LOCATION, OCCU_SPACE AS PLANES_STORED
+FROM HANGER;
+
+--20.
+SELECT COUNT(*) AS TOTAL_PLANES, MODEL AS PLANE_TYPE 
+FROM PLANE_TYPE AS P, AIRPLANE AS A 
+WHERE P.MODEL = A.MOD_NO
+GROUP BY MODEL
+ORDER BY COUNT(*);
+
+--21.
+SELECT COUNT(*) AS TOTAL_SERVICES_PERFORMED, A.REGNO AS AIRPLANE_REG#
+FROM PLANE_SERVICE AS PS, AIRPLANE AS A 
+WHERE PS.A_SERVICE = A.REGNO
+GROUP BY A.REGNO
+ORDER BY COUNT(*) DESC;
+
+--22. 
+SELECT SHIFT, AVG(SALARAY) AS AVERAGE_SAL
+FROM EMPLOYEE AS E 
+WHERE E.SHIFT IN ('MORNING', 'NIGHT', 'EVENING')
+GROUP BY SHIFT
+ORDER BY AVG(SALARAY);
+
+--23.
+SELECT ONAME AS OWNER, COUNT(*) AS TOTAL_PLANES_OWNED
+FROM OWNERS AS O, OWNS AS OH
+WHERE O.SSN = OH.OSSN
+GROUP BY ONAME
+ORDER BY COUNT(*);
+
+--24.
+SELECT PILID AS PILOT, COUNT(*) AS 'NO_OF_PLANES' 
+FROM FLIES AS F, PLANE_TYPE AS PT, PILOT AS P
+WHERE F.P_ID = P.PILID AND F.AIRMOD = PT.MODEL 
+GROUP BY P.PILID
+ORDER BY COUNT(*);
+
+
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+----------------------------------EXTRA QUERIES------------------------------------
+-----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
+
+
+
+--25. 
+--Write a SQL query to find the average time it takes for a plane to undergo maintenance, grouped by plane type.
+
+SELECT AVG(HOURS_WORKED) AS AVERAGE_HOURS , A_SERVICE AS MODEL
+FROM PLANE_SERVICE AS PS
+GROUP BY PS.A_SERVICE
+ORDER BY AVERAGE_HOURS;
+
+
+--26.
+--Write a SQL query to find the average salaray of employees that work a particular shift (You can choose Morning, Evening or Night).
+SELECT AVG(SALARAY) AS 'Average_Salaray'
+FROM EMPLOYEE AS E
+WHERE shift_time = '7AM-3PM';
+
+--27.
+--Write a SQL query to find the available space in all the Hangars 
+SELECT HANGNO AS HANGER_NO, CAP-OCCU_SPACE AS AVAILABLE_SPACE
+FROM HANGER AS H;
+
+--28.
+--Write a SQL query to find the total number of planes owned by a particular coperation
+SELECT COONAME AS CORP, COUNT(*) AS TOTAL_PLANES_OWNED
+FROM OWNS AS OH, CORPORATION AS C 
+WHERE C.COONAME = 'Google Inc.' AND C.SSN = OH.OSSN
+GROUP BY COONAME
+ORDER BY COUNT(*);
+

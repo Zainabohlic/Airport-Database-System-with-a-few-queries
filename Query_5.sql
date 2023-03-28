@@ -1,0 +1,3 @@
+SELECT AVG(SALARAY) AS 'Average Salaray'
+FROM EMPLOYEE
+WHERE shift_time = '10PM-6AM';
